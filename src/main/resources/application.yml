@@ -1,0 +1,25 @@
+server:
+  port: 8080
+  forward-headers-strategy: framework
+  shutdown: graceful
+
+spring:
+  application:
+    name: shortlink-java
+  datasource:
+    url: jdbc:h2:mem:shortlinkdb;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+shortlink:
+  base-url: ${SHORTLINK_BASE_URL:http://localhost:8080}
+  cache:
+    capacity: 1000
+  rate-limit:
+    capacity: 10
+    refill-tokens-per-second: 2

@@ -1,0 +1,33 @@
+services:
+  db:
+    image: redis:8-alpine@sha256:5af80107c1eeecb484a2269b80a26d12bfa6521787da4663bd9f19f60a163483
+    container_name: shortlink_redis
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    ports:
+      - "6379:6379"
+    networks:
+      - shortlink-net
+    volumes:
+      - redis_data:/data
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shortlink-service
+    depends_on:
+      - db
+    environment:
+      - "SPRING_DATA_REDIS_HOST=db"
+      - "SPRING_DATA_REDIS_PORT=6379"
+      - "SERVER_PORT=8080"
+    ports:
+      - "8080:8080"
+    networks:
+      - shortlink-net
+
+volumes:
+  redis_data:
+
+networks:
+  shortlink-net:
+    driver: bridge
