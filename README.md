@@ -7,7 +7,7 @@ A containerized Java 21 service backed by Redis, orchestrated with Docker Compos
 * **Application (`app`):** Java 21 runtime built via a multi-stage Dockerfile and executed as a non-root user on port `8080`.
 * **Cache / Store (`db`):** Redis 8 Alpine configured with `256mb` memory limit (`allkeys-lru`), AOF persistence (`--appendonly yes`), and a named volume (`redis_data:/data`).
 * **Networking:** Services communicate over a dedicated bridge network (`shortlink-net`).
-* **Observability:** A host-side `cron` job runs [`scripts/check-logs.sh`](scripts/check-logs.sh) at regular intervals to scan recent container logs for error keywords.
+* **Observability:** A host-side `cron` job runs [`scripts/check-logs.sh`](scripts/check_logs.sh) at regular intervals to scan recent container logs for error keywords.
 
 ## Environment Variables
 
@@ -41,7 +41,7 @@ docker compose down
 
 ## Scheduled Log Monitoring
 
-Configure `PROJECT_DIR` in [`scripts/check-logs.sh`](scripts/check-logs.sh), ensure `LF` line endings, and enable execution:
+Configure `PROJECT_DIR` in [`scripts/check-logs.sh`](scripts/check_logs.sh), ensure `LF` line endings, and enable execution:
 
 ```bash
 chmod +x scripts/check-logs.sh
