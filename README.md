@@ -57,6 +57,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ## AWS Deployment Roadmap
 
-1. **Single-Host Baseline (EC2):** Provision an EC2 instance (`t3.small` or higher), restrict security group ingress (SSH to trusted IPs; HTTP/HTTPS as needed), install Docker and Compose, deploy with `docker compose up -d --build`, and schedule [`scripts/check-logs.sh`](scripts/check-logs.sh).
+1. **Single-Host Baseline (EC2):** Provision an EC2 instance (`t3.small` or higher), restrict security group ingress (SSH to trusted IPs; HTTP/HTTPS as needed), install Docker and Compose, deploy with `docker compose up -d --build`, and schedule [`scripts/check-logs.sh`](scripts/check_logs.sh).
 2. **Hardening & Observability:** Place a reverse proxy or Application Load Balancer with TLS in front of the service, forward logs to CloudWatch, and configure SNS alerts and log/volume retention.
 3. **Horizontal Scale & Managed State:** Transition compute to Amazon ECS behind an ALB, offload caching to Amazon ElastiCache, and introduce Amazon RDS if relational persistence becomes required.
